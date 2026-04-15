@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <time.h>
 
+
 // struct for Example 2
 typedef struct Node
 {
@@ -18,11 +19,19 @@ void append(Node **head, void *data);
 void printIntList(Node *head);
 void removeLast(Node **head);
 void freeList(Node **head);
+
 void swap(int *a, int *b);
 void modifyArray(int arr[], int size);
 void modifyMatrix(int rows, int cols, int arr[rows][cols]);
 void novowels(char *s);
+
 int fakultaet(int n);
+int add(int a, int b);
+int sub(int a, int b);
+void hello();
+
+void execute(void (*func)());
+
 
 
 int main(void)
@@ -217,6 +226,46 @@ int main(void)
     int n = 6;
 
     printf("%d! = %d\n", n, fakultaet(n));
+    printf("\n");
+
+
+    // --------------------- EXAMPLE 10 --------------------------
+    printf("-------- EXAMPLE %i --------\n\n", example_counter++);
+
+    int (*op)(int, int);
+
+    op = add;
+    printf("Add: %d\n", op(5, 3));
+
+    op = sub;
+    printf("Sub: %d\n", op(5, 3));
+
+
+    execute(hello);
+    printf("\n");
+
+
+    // --------------------- EXAMPLE 11 --------------------------
+    printf("-------- EXAMPLE %i --------\n\n", example_counter++);
+
+    int numb1 = 10, numb2 = 20, numb3 = 30;
+    int *arr[3];
+
+    arr[0] = &numb1;
+    arr[1] = &numb2;
+    arr[2] = &numb3;
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("%d\n", *arr[i]);  // Dereferencing
+    }
+
+    char *names[] = {"Anna", "Bob", "Chris"};
+
+    for(int i = 0; i < 3; i++)
+    {
+        printf("%s\n", names[i]);
+    }
 
 
     // --------------------- END PROG --------------------------
@@ -378,4 +427,31 @@ int fakultaet(int n)
     }
 
     return n * fakultaet(n - 1);
+}
+
+
+// func for Example 10: add und sub vars
+int add(int a, int b)
+{
+    return a + b;
+}
+
+
+int sub(int a, int b)
+{
+    return a - b;
+}
+
+
+// func for Example 10: Callback-function
+void hello()
+{
+    printf("Hello C! I love you :-)\n");
+}
+
+
+// Function with function pointer as parameter
+void execute(void (*func)())
+{
+    func();
 }
